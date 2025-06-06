@@ -29,13 +29,14 @@ public class Battaglia {
     }
 
     public static boolean eseguiBattaglia(Comandante c1, Comandante c2) {
-        List<Combattente> esercito1 = new ArrayList<>(c1.getCombattenti());
-        List<Combattente> esercito2 = new ArrayList<>(c2.getCombattenti());
+        List<Combattente> esercito1 = new ArrayList<>(c1.getEsercito());
+        List<Combattente> esercito2 = new ArrayList<>(c2.getEsercito());
 
         int turno = 0;
         Random rand = new Random();
 
         while (esercitoVivo(esercito1) && esercitoVivo(esercito2)) {
+
             turno++;
             System.out.println("\n--- Turno " + turno + " ---");
 
@@ -50,6 +51,7 @@ public class Battaglia {
                             + danno + " danni");
                     if (!b.isAlive()) {
                         System.out.println(">> " + b.getDescrizione() + " è stato ucciso!");
+                        esercito2.remove(b);
                         c1.guadagna(20);
                     }
                 }
@@ -61,9 +63,11 @@ public class Battaglia {
                             + danno + " danni");
                     if (!a.isAlive()) {
                         System.out.println(">> " + a.getDescrizione() + " è stato ucciso!");
+                        esercito1.remove(a);
                         c2.guadagna(20);
                     }
                 }
+
             }
 
             // Punti a fine turno

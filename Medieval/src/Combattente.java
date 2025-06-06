@@ -4,7 +4,7 @@ public interface Combattente {
 
     void riceviDanno(int danno);
 
-    boolean eVivo();
+    boolean isAlive();
 
     int getCosto();
 

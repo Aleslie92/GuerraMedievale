@@ -1,69 +1,51 @@
-package Medieval
-
-import java.util.ArrayList;
-import java.util.List;
-
-Army Manager;
+import java.util.*;
 
 public class Comandante {
-    // ! Attributi
     private String nome;
     private int budget;
-    private List<Combattente> combattenti = new ArrayList<>();
-    private int guadagniTotali;
+    private List<Combattente> esercito = new ArrayList<>();
+    private int guadagniTotali = 0;
 
-    // ! Costruttore
-    public Comandante(String nome, int budget) {
+    public Comandante(String nome, int budgetIniziale) {
         this.nome = nome;
-        this.budget = budget;
+        this.budget = budgetIniziale;
     }
 
-    // ! Getter, setters
-    public String getNome() {
-        return nome;
+    public void arruolaSoldato(Combattente c) {
+        if (c.getCosto() <= budget) {
+            esercito.add(c);
+            budget -= c.getCosto();
+        } else {
+            System.out.println("Budget insufficiente per " + c.getDescrizione());
+        }
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void guadagna(int soldi) {
+        budget += soldi;
+        guadagniTotali += soldi;
+    }
+
+    public void perdiSoldi(int costo) {
+        budget -= costo;
+    }
+
+    public boolean èSconfitto() {
+        return esercito.stream().noneMatch(Combattente::isAlive);
+    }
+
+    public List<Combattente> getEsercito() {
+        return esercito;
     }
 
     public int getBudget() {
         return budget;
     }
 
-    public void setBudget(int budget) {
-        this.budget = budget;
+    public String getNome() {
+        return nome;
     }
 
-    public List<Combattente> getCombattenti() {
-        return combattenti;
-    }
-
-    public void setCombattenti(List<Combattente> combattenti) {
-        this.combattenti = combattenti;
-    }
-
-    public int getGuadagniTotali() {
-        return guadagniTotali;
-    }
-
-    public void setGuadagniTotali(int guadagniTotali) {
-        this.guadagniTotali = guadagniTotali;
-    }
-
-    // !Metodi
-    // * Assolda un combattente */
-    public void arruolaSoldato(Combattente c) {
-        combattenti.add(c);
-    }
-
-    public void combatti(List<Combattente> nemici) {
-        for (Combattente c : this.combattenti) {
-
-        }
-        for (Combattente n : nemici) {
-
-        }
-
+    public void resetEsercito() {
+        esercito.clear();
     }
 }
