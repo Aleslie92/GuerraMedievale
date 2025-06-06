@@ -40,33 +40,36 @@ public class Battaglia {
             turno++;
             System.out.println("\n--- Turno " + turno + " ---");
 
-            for (int i = 0; i < Math.min(esercito1.size(), esercito2.size()); i++) {
+            
+            for (int i = 0; i < Math.max(esercito1.size(), esercito2.size()); i++) {
+                
+                // Determina quale esercito ha più soldati
+        if(!esercito1.isEmpty() && !esercito2.isEmpty()) {
+        
+            // Esercito 1 ha più soldati
+            Combattente a = esercito1.get(rand.nextInt(esercito1.size()));
+            Combattente b = esercito2.get(rand.nextInt(esercito2.size()));
 
-                // for (Combattente a : esercito1) {
-                // for (Combattente b : esercito2) {
-                // }
-                // }
+    if (a.isAlive() && b.isAlive()) {
+    b.riceviDanno(a.attacca(b));
+    if (!b.isAlive()) {
+        System.out.println(">> " + b.getDescrizione() + " è stato ucciso!");
+        esercito2.remove(b);
+        c1.guadagna(20);
+    }
+}
 
-                Combattente a = esercito1.get((int) (Math.random() * esercito1.size()));
-
-                Combattente b = esercito2.get((int) (Math.random() * esercito2.size()));
-
-                a.riceviDanno(b.attacca(a));
-                b.riceviDanno(a.attacca(b));
-
-                if (!b.isAlive()) {
-                    System.out.println(">> " + b.getDescrizione() + " è stato ucciso!");
-                    esercito2.remove(b);
-                    c1.guadagna(20);
-
-                }
-
-                if (!a.isAlive()) {
-                    System.out.println(">> " + a.getDescrizione() + " è stato ucciso!");
-                    esercito1.remove(a);
-                    c2.guadagna(20);
-                }
-            }
+if (a.isAlive() && b.isAlive()) {
+    a.riceviDanno(b.attacca(a));
+    if (!a.isAlive()) {
+        System.out.println(">> " + a.getDescrizione() + " è stato ucciso!");
+        esercito1.remove(a);
+        c2.guadagna(20);
+    }
+}
+       
+        }
+    }
 
             // Punti a fine turno
             if (esercitoVivo(esercito1))
@@ -85,4 +88,6 @@ public class Battaglia {
     private static boolean esercitoVivo(List<Combattente> esercito) {
         return esercito.stream().anyMatch(Combattente::isAlive);
     }
+
+   
 }

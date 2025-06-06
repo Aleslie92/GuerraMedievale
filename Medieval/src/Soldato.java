@@ -3,6 +3,7 @@ public abstract class Soldato implements Combattente {
     private String nome;
     private int salute;
     protected int forzaAttacco;
+    
 
     public Soldato(String nome, int salute, int forzaAttacco) {
         this.nome = nome;

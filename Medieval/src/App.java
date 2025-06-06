@@ -10,7 +10,11 @@ public class App {
         // Arruolamento di soldati
         comandante.arruolaSoldato(new Cavaliere("Giovanna D'arco", 100, 20));
         comandante.arruolaSoldato(new Arciere("Robin Hood", 80, 15));
-        comandante.arruolaSoldato(new Lanciere("Geki chan", 120, 25));
+        comandante.arruolaSoldato(new Arciere("Mario", 80, 15));
+        comandante.arruolaSoldato(new Arciere("Ciao", 80, 15));
+
+        
+        
         System.out.println("Esercito arruolato: ");
         for (Combattente c : comandante.getEsercito()) {
             System.out.println(c.getDescrizione());
