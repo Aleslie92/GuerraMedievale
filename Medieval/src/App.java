@@ -17,14 +17,14 @@ public class App {
         }
         // Simulazione di una battaglia
 
-        List<Combattente> esercitoNemico = Battaglia.generaEsercitoNemico(100);
+        List<Combattente> esercitoNemico = Battaglia.generaEsercitoNemico(120);
         System.out.println("Esercito nemico generato: ");
         for (Combattente c : esercitoNemico) {
             System.out.println(c.getDescrizione());
         }
 
         // Esecuzione della battaglia
-        Comandante comandanteNemico = new Comandante("Nemico", 100);
+        Comandante comandanteNemico = new Comandante("Nemico", 120);
         for (Combattente c : esercitoNemico) {
             comandanteNemico.arruolaSoldato(c);
         }

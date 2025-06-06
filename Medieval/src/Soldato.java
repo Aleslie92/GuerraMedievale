@@ -35,7 +35,7 @@ public abstract class Soldato implements Combattente {
     }
 
     @Override
-    public int attacca() {
+    public int attacca(Combattente combattente) {
         return forzaAttacco;
     }
 

@@ -6,7 +6,7 @@ public class Battaglia {
         List<Combattente> esercito = new ArrayList<>();
         Random rand = new Random();
 
-        while (budget >= 20) {
+        while (budget >= 30) {
             int tipo = rand.nextInt(3); // 0: Cavaliere, 1: Arciere, 2: Lanciere
             Combattente soldato;
 
@@ -41,33 +41,31 @@ public class Battaglia {
             System.out.println("\n--- Turno " + turno + " ---");
 
             for (int i = 0; i < Math.min(esercito1.size(), esercito2.size()); i++) {
-                Combattente a = esercito1.get(i);
-                Combattente b = esercito2.get(i);
 
-                if (a.isAlive()) {
-                    int danno = a.attacca();
-                    b.riceviDanno(danno);
-                    System.out.println("[" + a.getDescrizione() + "] attacca -> [" + b.getDescrizione() + "] per "
-                            + danno + " danni");
-                    if (!b.isAlive()) {
-                        System.out.println(">> " + b.getDescrizione() + " è stato ucciso!");
-                        esercito2.remove(b);
-                        c1.guadagna(20);
-                    }
+                // for (Combattente a : esercito1) {
+                // for (Combattente b : esercito2) {
+                // }
+                // }
+
+                Combattente a = esercito1.get((int) (Math.random() * esercito1.size()));
+
+                Combattente b = esercito2.get((int) (Math.random() * esercito2.size()));
+
+                a.riceviDanno(b.attacca(a));
+                b.riceviDanno(a.attacca(b));
+
+                if (!b.isAlive()) {
+                    System.out.println(">> " + b.getDescrizione() + " è stato ucciso!");
+                    esercito2.remove(b);
+                    c1.guadagna(20);
+
                 }
 
-                if (b.isAlive()) {
-                    int danno = b.attacca();
-                    a.riceviDanno(danno);
-                    System.out.println("[" + b.getDescrizione() + "] attacca -> [" + a.getDescrizione() + "] per "
-                            + danno + " danni");
-                    if (!a.isAlive()) {
-                        System.out.println(">> " + a.getDescrizione() + " è stato ucciso!");
-                        esercito1.remove(a);
-                        c2.guadagna(20);
-                    }
+                if (!a.isAlive()) {
+                    System.out.println(">> " + a.getDescrizione() + " è stato ucciso!");
+                    esercito1.remove(a);
+                    c2.guadagna(20);
                 }
-
             }
 
             // Punti a fine turno
@@ -75,6 +73,7 @@ public class Battaglia {
                 c1.guadagna(10);
             if (esercitoVivo(esercito2))
                 c2.guadagna(10);
+
         }
 
         boolean c1Vince = esercitoVivo(esercito1);
